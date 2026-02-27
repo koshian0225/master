@@ -1,0 +1,64 @@
+FROM nvidia/cuda:12.8.0-devel-ubuntu22.04
+SHELL ["/bin/bash", "-c"]
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    wget curl git ca-certificates \
+    gcc g++ build-essential \
+    python3-dev python3-pip python3-numpy \
+    libboost-python-dev libboost-numpy-dev \
+    libhdf5-dev libopencv-dev \
+    libvtk9-dev libeigen3-dev libglew-dev \
+    libtbb-dev libopenni-dev libopenni2-dev \
+    freeglut3-dev libgl1-mesa-dev libglu1-mesa-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENV CONDA_DIR=/opt/conda
+ENV PATH=$CONDA_DIR/bin:$PATH
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    bash Miniconda3-latest-Linux-x86_64.sh -b -p $CONDA_DIR && \
+    rm Miniconda3-latest-Linux-x86_64.sh
+
+COPY environment.yml .
+RUN conda init bash && \
+    conda config --set always_yes true && \
+    conda config --set channel_priority flexible && \
+    conda config --remove channels defaults || true && \
+    conda config --add channels conda-forge && \
+    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main && \
+    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r && \
+    conda update -n base conda && \
+    conda create -n bp python=3.11 && \
+    conda clean -a
+
+# PyTorch 2.9.1 + CUDA 12.8
+RUN /opt/conda/envs/bp/bin/python -m pip install --no-cache-dir \
+    --index-url https://download.pytorch.org/whl/cu128 \
+    torch==2.9.1+cu128 \
+    torchvision==0.24.1+cu128 \
+    torchaudio==2.9.1+cu128
+
+# numpy は通常の PyPI
+RUN /opt/conda/envs/bp/bin/python -m pip install --no-cache-dir numpy==1.26.4
+
+ARG SERVER_HOSTNAME=unknown
+ENV SERVER_HOSTNAME=${SERVER_HOSTNAME}
+
+RUN wget -q https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -O /root/.git-prompt.sh && \
+    echo "source /root/.git-prompt.sh" >> /root/.bashrc && \
+    echo "export PS1='\[\033[01;32m\]bpnet@docker\[\033[00m\](\[\033[01;35m\]\$SERVER_HOSTNAME\\[\\033[00m\\]):\[\033[01;34m\]\w\[\033[31m\]\$(__git_ps1 \" (%s)\")\[\033[00m\]\$ '" >> /root/.bashrc && \
+    echo 'source $CONDA_DIR/etc/profile.d/conda.sh && conda activate bp' >> /root/.bashrc
+
+# Git 設定
+RUN git config --global --add safe.directory /workspace/bpnet
+
+# Python パッケージ追加
+RUN /opt/conda/envs/bp/bin/pip install openpyxl dill scikit-image tqdm hydra-core tensorboard timm einops h5py && \
+    /opt/conda/envs/bp/bin/pip install --use-pep517 mmcv
+
+# bash 起動時に conda 環境をアクティベート
+ENV CONDA_DEFAULT_ENV=bp
+ENV PATH=/opt/conda/envs/bp/bin:$PATH
+ENV PYTHONWARNINGS="ignore::FutureWarning"
+ENTRYPOINT ["/bin/bash", "-c", "source /opt/conda/etc/profile.d/conda.sh && conda activate bp && exec bash"]

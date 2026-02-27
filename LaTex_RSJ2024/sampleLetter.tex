@@ -1,0 +1,78 @@
+\documentclass[paper]{jrsj}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{enumerate}
+% \usepackage{caption}
+% \captionsetup[table]{name=Table., labelsep=quad}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\reffig}[1]{\textbf{Fig.}\ \textbf{\ref{#1}}}
+\newcommand{\reftable}[1]{\textbf{Table}\ \textbf{\ref{#1}}}
+
+%% 論文の種類を記入（学術・技術論文 / 学術論文 / 討論など）
+\typeofpaper{レター}
+%% 発行年（コメントアウトしておく）
+%\Year{2018}
+%% 巻数（コメントアウトしておく）
+%\Vol{36}
+%% 号数（コメントアウトしておく）
+%\No{1}
+%% 邦文題名
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{自動運転のための単眼深度推定と\protect\\
+三次元地図を利用した実スケール距離推定}
+%% 邦文副題名（必要な場合のみ）
+%\subtitle{レター同時投稿用の原稿の書き方}
+%% 英文題名
+\etitle{Distance Estimation with Metric Scale\protect\\
+using Monocular Depth Estimation and 3D Map for Autonomous Driving}
+%% 英文副題名（必要な場合のみ）
+%\esubtitle{How to write Letter}
+%% 著者のリスト
+\authorlist{%
+\authorentry{福田 直季}{Fukuta Naoki}{label1}
+\authorentry{田崎 豪}{Tsuyoshi Tasaki}{label1}
+}
+%% 著者の所属
+\affiliate[label1]{名城大学}{Meijo University}
+
+
+%% 原稿受付日（記述しない，空欄に）
+\received{}
+%% 本論文は××性（××××分野）で評価されました．
+\evaluated{要素分野}
+
+\begin{document}
+% \begin{abstract}
+% Letterには，Abstractが必要です．Letterには，Abstractが必要です．Letterには，Abstractが必要です．
+% Letterには，Abstractが必要です．Letterには，Abstractが必要です．Letterには，Abstractが必要です．
+% Letterには，Abstractが必要です．Letterには，Abstractが必要です．Letterには，Abstractが必要です．
+% \end{abstract}
+\begin{abstract}
+    PMOD-Net uses monocular camera 3D maps for 3D obstacle detection, but struggles with dynamic obstacles such as people
+and cars. In this study, we focus on the complementary relationship between monocular depth estimation (MDE) and 3D map.
+MDE provides the relative depth of all objects in an image, and 3D map provides absolute distances of static objects. We propose
+a novel method to enhance dynamic obstacle detection by integrating MDE and 3D maps. The proposed method reduces the
+distance estimation error by 0.85 m compared to PMOD-Net.
+\end{abstract}
+%% 英文キーワード
+\begin{keywords}
+    obstacle detection, deep neural network, monocular depth estimation
+\end{keywords}
+\maketitle
+\input{sampleBody.tex}
+
+%% 付録（必要な場合のみ）
+%\appendix 
+
+   
+\end{document}

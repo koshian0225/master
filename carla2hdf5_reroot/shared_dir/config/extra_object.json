@@ -1,0 +1,245 @@
+{
+    "1": {
+        "name": "static.prop.clothcontainer",
+        "x":        96.2,
+        "y":        -236.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "2": {
+        "name": "static.prop.clothcontainer",
+        "x":        96.2,
+        "y":        -212.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "3": {
+        "name": "static.prop.clothcontainer",
+        "x":        112.0,
+        "y":        -203.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "4": {
+        "name": "static.prop.clothcontainer",
+        "x":        164.8,
+        "y":        -203.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "5": {
+        "name": "static.prop.clothcontainer",
+        "x":        204.8,
+        "y":        -203.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "6": {
+        "name": "static.prop.clothcontainer",
+        "x":        252.8,
+        "y":        -203.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "7": {
+        "name": "static.prop.clothcontainer",
+        "x":        299.8,
+        "y":        -203.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "8": {
+        "name": "static.prop.clothcontainer",
+        "x":        331.0,
+        "y":        -219.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "9": {
+        "name": "static.prop.clothcontainer",
+        "x":        331.0,
+        "y":        -278.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "10": {
+        "name": "static.prop.clothcontainer",
+        "x":        330.8,
+        "y":        -315.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "11": {
+        "name": "static.prop.clothcontainer",
+        "x":        354.8,
+        "y":        -334.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "12": {
+        "name": "static.prop.clothcontainer",
+        "x":        400.8,
+        "y":        -307.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "13": {
+        "name": "static.prop.clothcontainer",
+        "x":        400.8,
+        "y":        -241.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "14": {
+        "name": "static.prop.clothcontainer",
+        "x":        400.8,
+        "y":        -95.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "15": {
+        "name": "static.prop.clothcontainer",
+        "x":        400.8,
+        "y":        -27.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "16": {
+        "name": "static.prop.clothcontainer",
+        "x":        375.8,
+        "y":        6.14,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "17": {
+        "name": "static.prop.clothcontainer",
+        "x":        349.8,
+        "y":        6.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "18": {
+        "name": "static.prop.clothcontainer",
+        "x":        321.8,
+        "y":        6.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "19": {
+        "name": "static.prop.clothcontainer",
+        "x":        253.8,
+        "y":        6.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "20": {
+        "name": "static.prop.clothcontainer",
+        "x":        183.8,
+        "y":        6.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "21": {
+        "name": "static.prop.clothcontainer",
+        "x":        149.8,
+        "y":        -21.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "22": {
+        "name": "static.prop.clothcontainer",
+        "x":        127.8,
+        "y":        -51.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "23": {
+        "name": "static.prop.clothcontainer",
+        "x":        84.8,
+        "y":        -76.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "24": {
+        "name": "static.prop.clothcontainer",
+        "x":        84.8,
+        "y":        -105.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "25": {
+        "name": "static.prop.clothcontainer",
+        "x":        84.8,
+        "y":        -125.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "26": {
+        "name": "static.prop.clothcontainer",
+        "x":        84.8,
+        "y":        -147.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "27": {
+        "name": "static.prop.clothcontainer",
+        "x":        84.8,
+        "y":        -180.0,
+        "z":        0.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    }
+}

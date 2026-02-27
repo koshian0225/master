@@ -1,0 +1,141 @@
+FROM ubuntu:18.04
+
+ARG PYTHON_VERSION="3.7.9"
+ARG CARLA_VERSION="0.9.14"
+ARG CARLA_EGG_VERSION="0.9.14"
+ARG HOME="/root"
+ARG PYTHON_ROOT="$HOME/local/python-$PYTHON_VERSION"
+ARG PYENV_ROOT="$HOME/.pyenv"
+ENV PATH="$PYTHON_ROOT/bin:$PATH"
+
+WORKDIR /root/
+
+RUN sed -i.bak -e "s%http://[^ ]\+%http://ftp.yz.yamagata-u.ac.jp/pub/linux/ubuntu/archives/%g" /etc/apt/sources.list
+
+ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y \
+        git \
+        make \
+        build-essential \
+        clang-8 \
+        lld-8 \
+        g++-7 \
+        cmake \
+        python3-pip \
+        python3-dev \python3-dev \
+        python3-numpy-dev \
+        libboost-python-dev \
+        libboost-numpy-dev \
+        libpcl-dev \
+        libopencv-dev \
+        ninja-build \
+        libvulkan1 \
+        libssl-dev \
+        zlib1g-dev \
+        libbz2-dev \
+        libreadline-dev \
+        libsqlite3-dev \
+        wget \
+        llvm \
+        libncurses5-dev \
+        libncursesw5-dev \
+        xz-utils \
+        tk-dev \
+        libffi-dev \
+        libpng-dev \
+        libtiff5-dev \
+        libjpeg-dev \
+        tzdata \
+        sed \
+        curl \
+        unzip \
+        autoconf \
+        libtool \
+        rsync \
+        libxml2-dev \
+        libsdl-dev \
+        libsdl-image1.2-dev \
+        libsdl-mixer1.2-dev \
+        libsdl-ttf2.0-dev \
+        libsmpeg-dev \
+        libportmidi-dev \
+        libavformat-dev \
+        libswscale-dev \
+        libxkbcommon-x11-0 \
+        libxcb-icccm4 \
+        libxcb-image0 \
+        libxcb-keysyms1 \
+        libxcb-render-util0 \
+        libxcb-xinerama0 \
+        liblzma-dev \
+        python-opengl && \
+    update-alternatives --install /usr/bin/clang++ clang++ /usr/lib/llvm-8/bin/clang++ 180 && \
+    update-alternatives --install /usr/bin/clang clang /usr/lib/llvm-8/bin/clang 180 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT && \
+    $PYENV_ROOT/plugins/python-build/install.sh && \
+    /usr/local/bin/python-build -v $PYTHON_VERSION $PYTHON_ROOT && \
+    rm -rf $PYENV_ROOT
+
+RUN pip3 install -Iv \
+        setuptools==47.3.1 && \
+    pip3 install \
+        distro \
+        scikit-build \
+        cmake \
+        ninja \
+        numpy \
+        numpy-quaternion \
+        opencv-python-headless \
+        scipy \
+        PySide2 \
+        PyOpenGL \
+        PyOpenGL_accelerate \
+        pyqtgraph \
+        transforms3d \
+        pygame \
+        rich
+
+RUN ln -s ${HOME}/local/python-${PYTHON_VERSION}/include/python3.7m ${HOME}/local/python-${PYTHON_VERSION}/include/python3.7
+
+RUN if [[ ! -f /usr/lib/x86_64-linux-gnu/libboost_numpy3.so ]]; then \
+        ln -s /usr/lib/x86_64-linux-gnu/libboost_numpy3*.so /usr/lib/x86_64-linux-gnu/libboost_numpy3.so ; \
+    fi; \
+    if [[ ! -f /usr/lib/x86_64-linux-gnu/libboost_python3.so ]]; then \
+        ln -s /usr/lib/x86_64-linux-gnu/libboost_python3*.so /usr/lib/x86_64-linux-gnu/libboost_python3.so ; \
+    fi
+
+RUN if [[ -f /opt/conda/bin/activate ]]; then \
+        source /opt/conda/bin/activate && \
+        conda install -c conda-forge scikit-build ninja h5py==2.10.0; \
+    else \
+        pip3 install scikit-build ninja h5py==2.10.0; \
+    fi; \
+    pip3 install git+https://github.com/shikishima-TasakiLab/pointsmap-python
+
+RUN pip3 install --upgrade pip
+RUN pip3 install git+https://github.com/shikishima-TasakiLab/h5datacreator
+RUN pip3 install open3d==0.15.2
+
+RUN git clone -b $CARLA_VERSION https://github.com/carla-simulator/carla.git && \
+    cd carla && \
+    make PythonAPI && \
+    mkdir -p -v /opt/carla && \
+    cp -r -v PythonAPI /opt/carla/ && \
+    cd .. && \
+    rm -rf carla
+RUN ln -s /opt/carla
+
+RUN pip3 install --trusted-host git-docker.tasakilab --extra-index-url http://git-docker.tasakilab:5500/simple h5dataviewer
+
+RUN echo "export PS1='\[\033[01;32m\]carla2hdf5@dokcer\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> /root/.bashrc
+
+ENV PYTHONPATH "${PYTHONPATH}:/opt/carla/PythonAPI/carla/dist/carla-${CARLA_EGG_VERSION}-py3.7-linux-x86_64.egg"
+
+WORKDIR /workspace

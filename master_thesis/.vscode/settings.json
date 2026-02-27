@@ -1,0 +1,5 @@
+{
+  "latex-workshop.docker.enabled": true,
+  "latex-workshop.docker.image.latex": "texlive/texlive:latest",
+  "latex-workshop.latex.recipe.default": "lastUsed"
+}

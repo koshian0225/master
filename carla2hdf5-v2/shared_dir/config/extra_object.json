@@ -1,0 +1,47 @@
+{
+    "0": {
+        "name": "static.prop.bin",
+        "x":        92.8,
+        "y":        -194.0,
+        "z":        3.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "1": {
+        "name": "static.prop.clothcontainer",
+        "x":        102.8,
+        "y":        -194.0,
+        "z":        3.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "2": {
+        "name": "static.prop.box01",
+        "x":        82.8,
+        "y":        -194.0,
+        "z":        3.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "3": {
+        "name": "static.prop.slide",
+        "x":        92.8,
+        "y":        -184.0,
+        "z":        3.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    },
+    "4": {
+        "name": "static.prop.plasticchair",
+        "x":        92.8,
+        "y":        -204.0,
+        "z":        1.0,
+        "pitch":    0.0,
+        "yaw":      0.0,
+        "roll":     0.0
+    }
+}

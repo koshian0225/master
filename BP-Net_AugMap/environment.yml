@@ -1,0 +1,17 @@
+name: bp
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - h5py>=3.8
+  - opencv
+  - scipy
+  - matplotlib
+  - pip
+  - pip:
+      - mmcv
+      - openpyxl
+      - dill
+      - scikit-image

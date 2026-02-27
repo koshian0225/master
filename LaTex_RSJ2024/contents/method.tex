@@ -1,0 +1,42 @@
+\section{提案手法}
+
+新たに開発したPMOD-NetDの構造を\reffig{networkarchitecture}に示す．
+カメラ画像から深度画像を作成し，スケール調整を行う．
+ここで深度画像の作成には単眼深度推定用のニューラル
+ネットワーク (Monocular Depth Estimation:MDE Network) を用いる．本研究の評価実験ではMDE
+Networkとして，NDDepth\cite{1}やMIMDepth\cite{2}を用い
+た．またMDE Networkが学習した環境であれば，スケー
+ル調整は不要であるため，行わない．学習していない環境
+であれば，スケールの調整を行う．
+
+スケールの調整方法として，地面の高さを用いる手法
+\cite{11}を利用する．地面を利用したスケール調整方法の手順
+を以下に示す．
+\begin{enumerate}[1.]
+    \item RANSAC\cite{12}で平面推定を行い，単眼深度推定の出
+    力から地面点群を抽出する．
+    \item 事前に取得したカメラの高さ$z$を用いて式(\ref{Scale_S})でスケール
+    $S$を算出する．ここで$P_c^{i}$と$N$はそれぞれ，単眼深度推定か
+    ら得られた地面点群における点$i$の高さと点群数を示す．
+    \begin{equation}
+        \label{Scale_S}
+        S= \frac{z}{\frac{1}{N}{}\sum_{i=1}^{N}P_c^{i}} 
+    \end{equation}
+\end{enumerate}
+
+ここで取得した$S$と深度画像$I_o$からスケール調整した距離画
+像$I_D$を式(\ref{metric_Id})のように取得する．
+\begin{equation}
+    \label{metric_Id}
+    I_D=S*I_o
+\end{equation}
+
+カメラ画像と疎な距離画像，距離画像$I_D$をチャンネル方向に
+結合し，PMOD-NetDの入力とする．常に絶対的な距離情報をも
+つ三次元地図と入力段階で結合することで前述した欠点を補い
+つつ学習を進めることができる．
+
+また距離画像$I_D$は，任意のMDE Networkから作成可能であり，
+精度が良い手法であるほど，最終的な精度を高めることができ
+る．そのため，PMOD-NetとMDE Networkどちらの開発が進んで
+も，精度向上に寄与することができる．

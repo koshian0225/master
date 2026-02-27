@@ -1,0 +1,77 @@
+\usepackage[top=35truemm,bottom=30truemm,left=30truemm,right=30truemm]{geometry}
+
+\makeatletter
+
+\def\thesistype#1{\gdef\@thesistype{#1}}
+\def\supervisor#1{\gdef\@supervisor{#1}}
+\def\supervisorposition#1{\gdef\@supervisorposition{#1}}
+\def\belonging#1{\gdef\@belonging{#1}}
+
+\renewcommand{\maketitle}{%
+  \begin{titlepage}%
+    \begin{center}%
+      {\LARGE \bf\@thesistype}%
+    \end{center}%
+    \vspace{32truemm}%
+    \begin{center}%
+      {\LARGE \bf \@title}%
+    \end{center}%
+    \vspace{12truemm}%
+    \begin{center}%
+      指導教員 \quad \@supervisor \quad \@supervisorposition%
+    \end{center}%
+    \vspace{70truemm}%
+    \begin{center}%
+      \@belonging%
+    \end{center}%
+    \begin{center}%
+      \@author%
+    \end{center}%
+    \begin{center}%
+      \@date%
+    \end{center}%
+  \end{titlepage}%
+}
+\renewcommand{\abstractname}{%
+  \begin{center}%
+    {\LARGE \bf 概要}%
+  \end{center}%
+}
+\renewcommand{\baselinestretch}{1.15}
+\newcommand{\Section}[1]{
+  \clearpage%
+  \section{#1}%
+}
+\newcommand{\SubSection}[1]{
+  \subsection{#1}%
+}
+\newcommand{\SubSubSection}[1]{
+  \subsubsection{#1}%
+}
+\newcommand{\Bibliography}[1]{
+  \clearpage%
+  \addcontentsline{toc}{section}{参考文献}%
+  \bibliographystyle{jIEEEtran}%
+  \bibliography{#1}%
+}
+\newcommand{\TableOfContents}{
+  \tableofcontents%
+  \setcounter{page}{0}%
+  \thispagestyle{empty}%
+}
+\newenvironment{acknowledgement}{
+  \clearpage%
+  \addcontentsline{toc}{section}{謝辞}%
+  \section*{謝辞}%
+}{}
+\newcommand{\SupplementBegin}{
+  \renewcommand{\thesection}{\Alph{section}}%
+  \setcounter{section}{0}%
+  \clearpage%
+  \addcontentsline{toc}{section}{付録}%
+  \section*{付録}%
+}
+\newcommand{\Fig}[1]{図 \ref{#1}}
+\newcommand{\Table}[1]{表 \ref{#1}}
+\newcommand{\Eq}[1]{式 (\ref{#1})}
+\makeatother

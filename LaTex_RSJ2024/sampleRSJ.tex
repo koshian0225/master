@@ -1,0 +1,29 @@
+\documentclass{jarticle}
+\usepackage{rsjletter}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage{url}
+\usepackage{bm}
+\usepackage{here}
+%\usepackage{tikz}
+
+
+\begin{document}
+\title{物体の高さ方向の学習による単純形状物体の姿勢推定精度向上}
+\author{○上田 純矢（名城大学）\ \ 田崎 豪（名城大学）}
+%\abstract{From 2023, authors are encouraged to write an article's abstract in either Japanese or English. Ab-stracts should be 3-6 lines long (100 words or less in English). If authors use simultaneous submission of the [Letter], an abstract in English is required. If authors are not using simultaneous submission and will submit the article in English to other journals in the future, an abstract in English is not recommended due to the risk of being considered self-plagiarism. }
+\abstract{PYNet has imporoved the accuracy of pose estimation for simple-shaped objects by initially estimating the object's grounding surface. 
+        This approach reduces the degrees of freedom in the pose to be estimated.
+         However, estimating poses that are 180°rotated remains a challenging task. 
+         To address this problem, we developed a new method that also estimates the height direction of the object.
+         This additional constraint on the pose of the simple-shaped object being estimated further improves the pose estimation accuracy. 
+         When compared to the conventional PYNet, our method achieved an accuracy improvement of 2.41pt in the original RGBD camera dataset
+        and 2.78pt in the pubic YCB object dataset. }
+\setlength{\baselineskip}{4.4mm}	% 行間の設定
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+\input{sampleBody.tex}
+
+\end{document}
